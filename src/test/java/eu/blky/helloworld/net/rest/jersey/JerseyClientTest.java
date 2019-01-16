@@ -2,6 +2,8 @@ package eu.blky.helloworld.net.rest.jersey;
 
 import static org.junit.Assert.*;
 
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
+ 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.Test;
@@ -21,6 +23,18 @@ import eu.blky.helloworld.net.rest.jersey.remote.Employee;
 import eu.blky.helloworld.net.rest.jersey.remote.Employees; 
 
 public class JerseyClientTest {
+	
+    /**
+     * Rigourous Test :-)
+     */
+	@Test
+    public void testApp()
+    {
+        for(URL url: ((URLClassLoader)ClassLoader.getSystemClassLoader()).getURLs()){
+        	System.out.println(url.getFile());
+        } 
+         
+    }
 
 	@Test
 	// 3. HTTP GET – Collection/List of Entities
