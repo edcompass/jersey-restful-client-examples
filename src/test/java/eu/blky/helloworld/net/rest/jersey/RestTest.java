@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RestTest {
@@ -27,6 +28,7 @@ public class RestTest {
 	}
 
 	@Test
+	@Ignore
 	public void test() {
 		fail("Not yet implemented");
 	}
