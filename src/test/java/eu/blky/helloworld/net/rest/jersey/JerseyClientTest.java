@@ -8,13 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.ClientBuilder; 
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
- 
+import javax.ws.rs.core.Response; 
+
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.Test;
@@ -24,7 +23,9 @@ import eu.blky.helloworld.net.rest.jersey.remote.Employees;
 
 public class JerseyClientTest {
 	
-    /**
+    private static final int STATUS_OK = 200;
+
+	/**
      * Rigourous Test :-)
      */
 	@Test
@@ -71,7 +72,7 @@ public class JerseyClientTest {
 		//Response response = invocationBuilder.post(Entity.entity(emp, MediaType.APPLICATION_XML));
 		Response response = invocationBuilder.get();
 		
-		assertEquals(response.getStatus(),200);
+		assertEquals(STATUS_OK, response.getStatus());
 		assertNotNull(response);
 		
 		
