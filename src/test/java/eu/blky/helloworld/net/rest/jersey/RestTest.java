@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class RestTest {
 	@Test
  
 	// http://localhost:8080/jersey-restful-client-example/rest/").path("xml").path("employees
-	public void testXML() throws IOException {
+	public void getXML() throws IOException {
 
 		URL url = new URL("http://localhost:8080/jersey-restful-client-example/rest/xml/employees/");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -68,7 +69,7 @@ public class RestTest {
 	
 	@Test
 	// http://localhost:8080/jersey-restful-client-example/rest/json/employees/
-	public void testJSON() throws IOException {
+	public void getJSON() throws IOException {
 
 		URL url = new URL("http://localhost:8080/jersey-restful-client-example/rest/json/employees/");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -82,6 +83,45 @@ public class RestTest {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 			(conn.getInputStream())));
+
+		String output;
+		System.out.println("Output from Server .... \n");
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+		}
+
+		conn.disconnect();
+	}
+	
+	
+	
+	
+	
+	@Test
+	// http://localhost:8080/jersey-restful-client-example/rest/json/employees/{id}
+	public void postJSON() throws IOException {
+
+		URL url = new URL("http://localhost:8080/jersey-restful-client-example/rest/json/employees/");
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("POST");
+		conn.setDoOutput(true);
+		conn.setRequestProperty("content-type", "application/json");
+		
+
+		String input = "{\"id\":4,\"name\":\"Pill Hates\"}";
+		
+		
+		OutputStream os = conn.getOutputStream();
+		os.write(input.getBytes());
+		os.flush();
+
+		if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+			throw new RuntimeException("Failed : HTTP error code : "
+				+ conn.getResponseCode());
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				(conn.getInputStream())));
 
 		String output;
 		System.out.println("Output from Server .... \n");
