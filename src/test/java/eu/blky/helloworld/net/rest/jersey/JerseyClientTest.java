@@ -73,10 +73,8 @@ public class JerseyClientTest {
 		Response response = invocationBuilder.get();
 		
 		assertEquals(STATUS_OK, response.getStatus());
-		assertNotNull(response);
-		
-		
-		assertTrue(  response.getAllowedMethods().size() == 0 );
+		assertNotNull(response); 
+		assertTrue(response.getAllowedMethods().size() == 0 );
 	}
 
 }
