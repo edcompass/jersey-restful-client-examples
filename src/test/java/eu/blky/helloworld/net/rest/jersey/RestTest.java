@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -81,8 +82,10 @@ public class RestTest {
 					+ conn.getResponseCode());
 		}
 
+		InputStream inputStream = conn.getInputStream();
+		System.out.println(inputStream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(
-			(conn.getInputStream())));
+			inputStream));
 
 		String output;
 		System.out.println("Output from Server .... \n");
